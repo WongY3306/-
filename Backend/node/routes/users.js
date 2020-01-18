@@ -5,26 +5,15 @@ var mySql = require('./sql')
 /* GET users listing. */
 router.post('/login', (req, res) => {
       var json = req.body
-      console.log(json)
       mySql.sql({
-        sql: `insert into login (name,pass) values('${json.name}','${json.pass}')`,
-        // sql: 'insert into login (name,pass) values(?,?)',
-        // arr: [json.name, json.pass],
+        sql: `insert into login (name,pass,tel) values('${json.name}','${json.pass}','${json.tel}')`,
         data(data) {
           console.log(data)
           res.send({
-            code: 0,
-            data: ''
+            user: data.insertId,
+            data:'注册成功'
           })
         }
-        // sql: `select * from login where user=1000`,
-        // data(data) {
-        //   console.log(data)
-        //   res.send({
-        //     code: 0,
-        //     data: ''
-        //   })
-        // }
       })
 })
       module.exports = router;
